@@ -1,0 +1,26 @@
+@model Vacation
+
+<div class="row">
+    <div class="col-sm-8 offset-sm-2">
+        <div class="card">
+            <img src="@Model.ImgUrl" alt="image of vacation" class="card-img-top">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h2>@Model.Destination</h2>
+                        <p>Mastermind: @Model.Planner.Name</p>
+                    </div>
+                    <div class="col">
+                        <h2>Participants</h2>
+                        <ul>
+                            @foreach (Association associate in Model.GroupMembers)
+                            {
+                                <li>@associate.Traveller.Name</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

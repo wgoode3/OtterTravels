@@ -6,11 +6,16 @@
 <div class="row">
     @foreach( Vacation v in Model )
     {
-        <div class="col-sm-4">
+        
+        string data = $"modal{v.VacationId}";
+        
+        <div class="col-md-6 col-lg-4 mb-4">
             <div class="card">
                 <img src="@v.ImgUrl" class="card-img-top hidden" alt="@v.Destination">
                 <div class="card-body">
-                    <h2 class="card-title">@v.Destination</h2>
+                    <a href="" class="text-dark modaller" data-toggle="modal" data-target=@data>
+                        <h2 class="card-title">@v.Destination</h2>
+                    </a>
                     <p>Start: @v.StartDate</p>
                     <p>For @v.NumberDays day(s)</p>
                     <p># of Guests: @v.GroupMembers.Count</p>
@@ -30,6 +35,35 @@
                             <a href="/join/@v.VacationId/@ViewBag.Otter.OtterId" class="btn btn-primary">Join</a>
                         }
                     }
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id=@data tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-dark text-white">
+                        <h5 class="modal-title " id="exampleModalLabel">@v.Destination</h5>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <p>Mastermind: @v.Planner.Name</p>
+                            </div>
+                            <div class="col">
+                                <h2>Participants</h2>
+                                <ul>
+                                    @foreach (Association associate in v.GroupMembers)
+                                    {
+                                        <li>@associate.Traveller.Name</li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
